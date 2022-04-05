@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "iAJccnbMPqjNpXNWJvmgt/PV+VOAgdAt/2j9HBcBRgSYNsuSfANB9WdGlTqPKme9p+GkDFxRS/yVyVNk6LuRvw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\HP\\source\\repos\\EyeMedia\\EyeMedia\\EyeMedia.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\HP\\.nuget\\packages\\materialdesigncolors\\2.0.5\\materialdesigncolors.2.0.5.nupkg.sha512",
+    "C:\\Users\\HP\\.nuget\\packages\\materialdesignthemes\\4.4.0\\materialdesignthemes.4.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}

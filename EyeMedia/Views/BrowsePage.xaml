@@ -1,0 +1,106 @@
+﻿<Page x:Class="EyeMedia.Views.BrowsePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      d:DesignHeight="450" d:DesignWidth="800" mc:Ignorable="d" >
+
+    <materialDesign:Card>
+        <TabControl Style="{StaticResource MaterialDesignNavigationRailTabControl}">
+
+            <materialDesign:NavigationRailAssist.ShowSelectionBackground>True</materialDesign:NavigationRailAssist.ShowSelectionBackground>
+            <TabControl.SnapsToDevicePixels>True</TabControl.SnapsToDevicePixels>
+            <TabControl.TabStripPlacement>Left</TabControl.TabStripPlacement>
+
+            <TabItem>
+
+                <TabItem.Header>
+                    <StackPanel Width="auto" Height="auto">
+                        <materialDesign:PackIcon Kind="Images" HorizontalAlignment="Center" Width="24" Height="24"/>
+                        <TextBlock Text="Photos" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </TabItem.Header>
+
+                <ItemsControl ItemsSource="{Binding ImageItems, Mode=TwoWay}" AllowDrop="True">
+
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+
+                            <Border Height="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.ItemsHeight, Mode=OneWay}" Width="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.ItemsWidth, Mode=OneWay}">
+
+                                <Border.CornerRadius>30</Border.CornerRadius>
+                                <Border.Margin>5</Border.Margin>
+                                
+                                <Border.Background>
+                                    <ImageBrush ImageSource="{Binding Image}"/>
+                                </Border.Background>
+
+                                <Button Background="Transparent" BorderThickness="0" Height="auto" Width="auto">
+
+                                    <Button.InputBindings>
+                                        <MouseBinding Command="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.OpenImageItemCommand}" Gesture="LeftDoubleClick"/>
+                                    </Button.InputBindings>
+                                    
+                                </Button>
+
+                            </Border>
+                            
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+
+                </ItemsControl>
+
+            </TabItem>
+            <TabItem>
+
+                <TabItem.Header>
+                    <StackPanel Width="auto" Height="auto">
+                        <materialDesign:PackIcon Kind="Video" HorizontalAlignment="Center" Width="24" Height="24"/>
+                        <TextBlock Text="Videos" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </TabItem.Header>
+
+                <ItemsControl ItemsSource="{Binding VideoItems}" AllowDrop="True">
+
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+
+                            <Border Background="{Binding Image}" Height="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.ItemsHeight, Mode=OneWay}" Width="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.ItemsWidth, Mode=OneWay}">
+
+                                <Border.CornerRadius>30</Border.CornerRadius>
+                                <Border.Margin>5</Border.Margin>
+
+                                <Button Background="Transparent" BorderThickness="0" Height="auto" Width="auto">
+
+                                    <Button.InputBindings>
+                                        <MouseBinding Command="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.OpenVideoItemCommand}" Gesture="LeftDoubleClick"/>
+                                    </Button.InputBindings>
+
+                                </Button>
+
+                            </Border>
+                            
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+
+                </ItemsControl>
+
+            </TabItem>
+
+        </TabControl>
+    </materialDesign:Card>
+
+</Page>
