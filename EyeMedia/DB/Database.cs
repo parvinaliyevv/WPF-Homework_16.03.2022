@@ -1,20 +1,36 @@
-﻿using System.Collections.Generic;
-using EyeMedia.Models;
+﻿using EyeMedia.Models.Concrete;
+using System.Collections.Generic;
 
 namespace EyeMedia.DB
 {
     public class Database
     {
-        public Dictionary<ItemLayout, KeyValuePair<int, int>> ItemLayoutSizes { get; set; }
+        private static Database? _instance;
 
 
-        public Database()
+        public List<ImageItem> ImageItems { get; set; }
+        public List<VideoItem> VideoItems { get; set; }
+
+
+        private Database()
         {
-            ItemLayoutSizes = new(3);
+            ImageItems = new()
+            {
+                new ImageItem(Services.ImageService.GetImageFromPath(@"C:\Users\Aliy_ql08\Desktop\WPF-Homework_16.03.2022\EyeMedia\Video\sharp.png")),
+            };
 
-            ItemLayoutSizes.Add(ItemLayout.Tile, new(150, 150));
-            ItemLayoutSizes.Add(ItemLayout.SmallIcon, new(50, 50));
-            ItemLayoutSizes.Add(ItemLayout.Detail, new(50, 50));
+            VideoItems = new()
+            {
+                new VideoItem(Services.ImageService.GetImageFromPath(@"C:\Users\Aliy_ql08\Desktop\WPF-Homework_16.03.2022\EyeMedia\Video\sharp.png")),
+            };
+        }
+
+
+        public static Database GetInstance()
+        {
+            if (_instance is null) _instance = new();
+
+            return _instance;
         }
     }
 }

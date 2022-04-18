@@ -3,53 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="EyeMedia" Height="600" Width="800" mc:Ignorable="d">
 
-    <Grid>
+    <Frame Content="{Binding SelectedPage, Mode=OneWay}" NavigationUIVisibility="Hidden"/>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" MaxHeight="50"/>
-            <RowDefinition Height="1"/>
-            <RowDefinition Height="7*"/>
-        </Grid.RowDefinitions>
-
-        <Menu IsMainMenu="True">
-            <MenuItem Header="_File">
-
-                <MenuItem Header="New"/>
-                <MenuItem Header="Open"/>
-                <Separator/>
-                <MenuItem Header="Save" Icon="{materialDesign:PackIcon Kind=ContentSave}"/>
-                <MenuItem Header="Save as"/>
-                <Separator/>
-                <MenuItem Header="Exit" Icon="{materialDesign:PackIcon Kind=ExitToApp}" InputGestureText="Ctrl+E"/>
-
-            </MenuItem>
-            <MenuItem Header="_Edit">
-
-                <MenuItem Header="Add file" Icon="{materialDesign:PackIcon Kind=FilePlus}"/>
-                <MenuItem Header="Add folder" Icon="{materialDesign:PackIcon Kind=FolderPlus}"/>
-
-            </MenuItem>
-            <MenuItem Header="_View">
-
-                <MenuItem IsCheckable="True" Header="Tiles"/>
-                <MenuItem IsCheckable="True" IsChecked="True" Header="Small icons"/>
-                <MenuItem IsCheckable="True" Header="Details"/>
-
-            </MenuItem>
-            <MenuItem Header="_About">
-
-                <MenuItem Header="About" Icon="{materialDesign:PackIcon Kind=Information}"/>
-
-            </MenuItem>
-        </Menu>
-
-        <Border Background="DimGray" Grid.Row="1"/>
-
-        <Frame Content="{Binding SelectedPage, Mode=OneWay}" Grid.Row="2"/>
-
-    </Grid>
-    
 </Window>

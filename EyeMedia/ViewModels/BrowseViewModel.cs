@@ -1,17 +1,18 @@
 ﻿using System.Windows;
 using System.Collections.ObjectModel;
 using EyeMedia.Commands;
-using EyeMedia.Services;
-using EyeMedia.Models;
+using EyeMedia.Models.Abstract;
+using EyeMedia.DB;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace EyeMedia.ViewModels
 {
     public class BrowseViewModel: DependencyObject
     {
         #region Properties
-        public ObservableCollection<ImageItem> ImageItems { get; set; }
 
-        public ObservableCollection<VideoItem> VideoItems { get; set; }
+        public ObservableCollection<ItemBase> Items { get; set; }
 
 
         public int ItemsHeight
@@ -29,26 +30,34 @@ namespace EyeMedia.ViewModels
         }
         public static readonly DependencyProperty ItemsWidthProperty =
             DependencyProperty.Register("ItemsWidth", typeof(int), typeof(BrowseViewModel));
+
         #endregion
 
         #region Commands
+
         public RelayCommand OpenImageItemCommand { get; set; }
         public RelayCommand OpenVideoItemCommand { get; set; }
+
+        public RelayCommand DisplayImages { get; set; }
+        public RelayCommand DisplayVideos { get; set; }
+
         #endregion
+
 
         public BrowseViewModel()
         {
-            ImageItems = new();
-            VideoItems = new();
+            Items = new();
 
             ItemsHeight = 150;
             ItemsWidth = 150;
+            
+            OpenImageItemCommand = new(sender => MainViewModel.GetInstance().SelectedPage = new Views.ImagePage());
+            OpenVideoItemCommand = new(sender => MainViewModel.GetInstance().SelectedPage = new Views.VideoPage());
 
-            OpenImageItemCommand = new RelayCommand(sender => MessageBox.Show("Image open!"));
-            OpenVideoItemCommand = new RelayCommand(sender => MessageBox.Show("Video open!"));
+                          DisplayImages = new(sender => { Items.Clear(); Database.GetInstance().ImageItems.ForEach(obj => Items.Add(obj)); });
+            DisplayVideos = new(sender => { Items.Clear(); Database.GetInstance().VideoItems.ForEach(obj => Items.Add(obj)); });
 
-            ImageItems.Add(new ImageItem(ImageService.GetImageFromPath(@"C:\Users\HP\Desktop\Data\hesen.jpeg")));
-            ImageItems.Add(new ImageItem(ImageService.GetImageFromPath(@"C:\Users\HP\Desktop\Data\cropped-1440-900-991929.jpg")));
+            Database.GetInstance().ImageItems.ForEach(obj => Items.Add(obj));
         }
     }
 }

@@ -1,7 +1,8 @@
-﻿using MaterialDesignThemes.Wpf;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using EyeMedia.ViewModels;
+using MaterialDesignThemes.Wpf;
 
 namespace EyeMedia.Views
 {
@@ -14,7 +15,7 @@ namespace EyeMedia.Views
         {
             InitializeComponent();
 
-            DataContext = new ViewModels.VideoViewModel();
+            DataContext = new VideoViewModel();
         }
 
 
@@ -66,5 +67,8 @@ namespace EyeMedia.Views
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
             => Media.Stretch = System.Windows.Media.Stretch.Fill;
+
+        private void ReturnMenu_ButtonClicked(object sender, RoutedEventArgs e)
+            => MainViewModel.GetInstance().SelectedPage = new BrowsePage();
     }
 }

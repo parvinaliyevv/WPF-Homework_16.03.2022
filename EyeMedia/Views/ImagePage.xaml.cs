@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using EyeMedia.ViewModels;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace EyeMedia.Views
 {
@@ -8,7 +10,11 @@ namespace EyeMedia.Views
         {
             InitializeComponent();
 
-            DataContext = new ViewModels.ImageViewModel();
+            DataContext = new ImageViewModel();
         }
+
+
+        private void ReturnMenu_ButtonClicked(object sender, RoutedEventArgs e)
+            => MainViewModel.GetInstance().SelectedPage = new BrowsePage();
     }
 }

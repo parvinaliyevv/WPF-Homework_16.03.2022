@@ -4,8 +4,11 @@ using EyeMedia.Views;
 
 namespace EyeMedia.ViewModels
 {
-    public class MainViewModel: DependencyObject
+    public class MainViewModel : DependencyObject
     {
+        private static MainViewModel? _instance;
+
+
         public Page SelectedPage
         {
             get { return (Page)GetValue(SelectedPageProperty); }
@@ -15,9 +18,14 @@ namespace EyeMedia.ViewModels
             DependencyProperty.Register("SelectedPage", typeof(Page), typeof(MainViewModel));
 
 
-        public MainViewModel()
+        private MainViewModel() => SelectedPage = new BrowsePage();
+
+
+        public static MainViewModel GetInstance()
         {
-            SelectedPage = new VideoPage();
+            if (_instance is null) _instance = new();
+
+            return _instance;
         }
     }
 }

@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "iAJccnbMPqjNpXNWJvmgt/PV+VOAgdAt/2j9HBcBRgSYNsuSfANB9WdGlTqPKme9p+GkDFxRS/yVyVNk6LuRvw==",
+  "dgSpecHash": "AunKgSe7lNvdv+89DMB0JWIrexYkb9+HoVKrAjq33sijz6IeIKm0+ZNd1JoNP9T2YUEsGW1VNGhlqkLpYEpgcQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\HP\\source\\repos\\EyeMedia\\EyeMedia\\EyeMedia.csproj",
+  "projectFilePath": "C:\\Users\\Aliy_ql08\\Desktop\\WPF-Homework_16.03.2022\\EyeMedia\\EyeMedia.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\HP\\.nuget\\packages\\materialdesigncolors\\2.0.5\\materialdesigncolors.2.0.5.nupkg.sha512",
-    "C:\\Users\\HP\\.nuget\\packages\\materialdesignthemes\\4.4.0\\materialdesignthemes.4.4.0.nupkg.sha512"
+    "C:\\Users\\Aliy_ql08\\.nuget\\packages\\materialdesigncolors\\2.0.5\\materialdesigncolors.2.0.5.nupkg.sha512",
+    "C:\\Users\\Aliy_ql08\\.nuget\\packages\\materialdesignthemes\\4.4.0\\materialdesignthemes.4.4.0.nupkg.sha512",
+    "C:\\Users\\Aliy_ql08\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.39\\microsoft.xaml.behaviors.wpf.1.1.39.nupkg.sha512"
   ],
   "logs": []
 }

@@ -2,6 +2,6 @@
 {
     public class VideoViewModel
     {
-        public string Path { get; set; } = @"D:\Videos\Devil May Cry 5\Devil May Cry 5_20211017135932.mp4";
+        public string Path { get; set; } = @"C:\Users\Aliy_ql08\Desktop\WPF-Homework_16.03.2022\EyeMedia\Video\Red Dead Redemption Official Trailer.mp4";
     }
 }

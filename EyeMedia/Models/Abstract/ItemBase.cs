@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace EyeMedia.Models
+namespace EyeMedia.Models.Abstract
 {
     public class ItemBase: INotifyPropertyChanged
     {
@@ -15,10 +15,10 @@ namespace EyeMedia.Models
         #region INotifyPropertyChanged
 
         public event PropertyChangedEventHandler? PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName]string propertyName = null)
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChangedEventHandler? handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+            if (handler is not null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #endregion

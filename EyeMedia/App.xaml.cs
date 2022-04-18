@@ -8,7 +8,7 @@ namespace EyeMedia
         {
             var mainView = new Views.MainView()
             {
-                DataContext = new ViewModels.MainViewModel() 
+                DataContext = ViewModels.MainViewModel.GetInstance()
             };
 
             mainView.ShowDialog();

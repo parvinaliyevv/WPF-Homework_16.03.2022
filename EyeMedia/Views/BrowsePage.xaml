@@ -3,104 +3,165 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       d:DesignHeight="450" d:DesignWidth="800" mc:Ignorable="d" >
 
-    <materialDesign:Card>
-        <TabControl Style="{StaticResource MaterialDesignNavigationRailTabControl}">
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" MaxHeight="50"/>
+            <RowDefinition Height="1"/>
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
 
-            <materialDesign:NavigationRailAssist.ShowSelectionBackground>True</materialDesign:NavigationRailAssist.ShowSelectionBackground>
-            <TabControl.SnapsToDevicePixels>True</TabControl.SnapsToDevicePixels>
-            <TabControl.TabStripPlacement>Left</TabControl.TabStripPlacement>
+        <Menu IsMainMenu="True" Background="#FFFAFAFA">
+            <MenuItem Header="_File">
 
-            <TabItem>
+                <MenuItem Header="New"/>
+                <MenuItem Header="Open"/>
+                <Separator/>
+                <MenuItem Header="Save" Icon="{materialDesign:PackIcon Kind=ContentSave}"/>
+                <MenuItem Header="Save as"/>
+                <Separator/>
+                <MenuItem Header="Exit" Icon="{materialDesign:PackIcon Kind=ExitToApp}" InputGestureText="Ctrl+E"/>
 
-                <TabItem.Header>
-                    <StackPanel Width="auto" Height="auto">
-                        <materialDesign:PackIcon Kind="Images" HorizontalAlignment="Center" Width="24" Height="24"/>
-                        <TextBlock Text="Photos" HorizontalAlignment="Center"/>
-                    </StackPanel>
-                </TabItem.Header>
+            </MenuItem>
+            <MenuItem Header="_Edit">
 
-                <ItemsControl ItemsSource="{Binding ImageItems, Mode=TwoWay}" AllowDrop="True">
+                <MenuItem Header="Add file" Icon="{materialDesign:PackIcon Kind=FilePlus}"/>
+                <MenuItem Header="Add folder" Icon="{materialDesign:PackIcon Kind=FolderPlus}"/>
 
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
+            </MenuItem>
+            <MenuItem Header="_View">
 
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
+                <MenuItem IsCheckable="True" Header="Tiles"/>
+                <MenuItem IsCheckable="True" IsChecked="True" Header="Small icons"/>
+                <MenuItem IsCheckable="True" Header="Details"/>
 
-                            <Border Height="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.ItemsHeight, Mode=OneWay}" Width="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.ItemsWidth, Mode=OneWay}">
+            </MenuItem>
+            <MenuItem Header="_About">
 
-                                <Border.CornerRadius>30</Border.CornerRadius>
-                                <Border.Margin>5</Border.Margin>
-                                
-                                <Border.Background>
-                                    <ImageBrush ImageSource="{Binding Image}"/>
-                                </Border.Background>
+                <MenuItem Header="About" Icon="{materialDesign:PackIcon Kind=Information}"/>
 
-                                <Button Background="Transparent" BorderThickness="0" Height="auto" Width="auto">
+            </MenuItem>
+        </Menu>
 
-                                    <Button.InputBindings>
-                                        <MouseBinding Command="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.OpenImageItemCommand}" Gesture="LeftDoubleClick"/>
-                                    </Button.InputBindings>
+        <Border Background="#FFFAFAFA" Grid.Row="1"/>
+
+        <materialDesign:Card Grid.Row="2">
+            <TabControl Style="{StaticResource MaterialDesignNavigationRailTabControl}">
+
+                <materialDesign:NavigationRailAssist.ShowSelectionBackground>True</materialDesign:NavigationRailAssist.ShowSelectionBackground>
+                <TabControl.SnapsToDevicePixels>True</TabControl.SnapsToDevicePixels>
+                <TabControl.TabStripPlacement>Left</TabControl.TabStripPlacement>
+
+                <TabItem>
+
+                     <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseUp">
+                            <i:InvokeCommandAction Command="{Binding DisplayImages}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    
+                    <TabItem.Header>
+                        <StackPanel Width="auto" Height="auto">
+                            <materialDesign:PackIcon Kind="Images" HorizontalAlignment="Center" Width="24" Height="24"/>
+                            <TextBlock Text="Photos" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </TabItem.Header>
+
+                    <ItemsControl ItemsSource="{Binding Items, Mode=TwoWay}" AllowDrop="True">
+
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+
+                                <Border Height="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.ItemsHeight, Mode=OneWay}" Width="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.ItemsWidth, Mode=OneWay}">
+
+                                    <Border.CornerRadius>30</Border.CornerRadius>
+                                    <Border.Margin>5</Border.Margin>
+
+                                    <Border.Background>
+                                        <ImageBrush ImageSource="{Binding Image}"/>
+                                    </Border.Background>
+
+                                    <Button Background="Transparent" BorderThickness="0" Height="auto" Width="auto">
+
+                                        <Button.InputBindings>
+                                            <MouseBinding Command="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.OpenImageItemCommand}" Gesture="LeftDoubleClick"/>
+                                        </Button.InputBindings>
+
+                                    </Button>
+
+                                </Border>
+
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+
+                    </ItemsControl>
+
+                </TabItem>
+                <TabItem>
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseUp">
+                            <i:InvokeCommandAction Command="{Binding DisplayVideos}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    
+                    <TabItem.Header>
+                        <StackPanel Width="auto" Height="auto">
+                            <materialDesign:PackIcon Kind="Video" HorizontalAlignment="Center" Width="24" Height="24"/>
+                            <TextBlock Text="Videos" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </TabItem.Header>
+
+                    <ItemsControl ItemsSource="{Binding Items, Mode=TwoWay}" AllowDrop="True">
+
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+
+                                <Border Height="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.ItemsHeight, Mode=OneWay}" Width="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.ItemsWidth, Mode=OneWay}">
+
+                                    <Border.CornerRadius>30</Border.CornerRadius>
+                                    <Border.Margin>5</Border.Margin>
+
+                                    <Border.Background>
+                                        <ImageBrush ImageSource="{Binding Image}"/>
+                                    </Border.Background>
                                     
-                                </Button>
+                                    <Button Background="Transparent" BorderThickness="0" Height="auto" Width="auto">
 
-                            </Border>
-                            
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
+                                        <Button.InputBindings>
+                                            <MouseBinding Command="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.OpenVideoItemCommand}" Gesture="LeftDoubleClick"/>
+                                        </Button.InputBindings>
 
-                </ItemsControl>
+                                    </Button>
 
-            </TabItem>
-            <TabItem>
+                                </Border>
 
-                <TabItem.Header>
-                    <StackPanel Width="auto" Height="auto">
-                        <materialDesign:PackIcon Kind="Video" HorizontalAlignment="Center" Width="24" Height="24"/>
-                        <TextBlock Text="Videos" HorizontalAlignment="Center"/>
-                    </StackPanel>
-                </TabItem.Header>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
 
-                <ItemsControl ItemsSource="{Binding VideoItems}" AllowDrop="True">
+                    </ItemsControl>
 
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
+                </TabItem>
 
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-
-                            <Border Background="{Binding Image}" Height="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.ItemsHeight, Mode=OneWay}" Width="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.ItemsWidth, Mode=OneWay}">
-
-                                <Border.CornerRadius>30</Border.CornerRadius>
-                                <Border.Margin>5</Border.Margin>
-
-                                <Button Background="Transparent" BorderThickness="0" Height="auto" Width="auto">
-
-                                    <Button.InputBindings>
-                                        <MouseBinding Command="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.OpenVideoItemCommand}" Gesture="LeftDoubleClick"/>
-                                    </Button.InputBindings>
-
-                                </Button>
-
-                            </Border>
-                            
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-
-                </ItemsControl>
-
-            </TabItem>
-
-        </TabControl>
-    </materialDesign:Card>
+            </TabControl>
+        </materialDesign:Card>
+        
+    </Grid>
 
 </Page>
