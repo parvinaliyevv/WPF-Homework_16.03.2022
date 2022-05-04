@@ -24,7 +24,7 @@
 
         </DockPanel>
 
-        <MediaElement Name="Media" Source="{Binding Path}" ScrubbingEnabled="True" LoadedBehavior="Manual" Margin="30, 0" Loaded="Media_Loaded" Grid.Row="1"/>
+        <MediaElement Name="Media" Source="{Binding Path}" ScrubbingEnabled="True" LoadedBehavior="Manual" Margin="5, 0" Loaded="Media_Loaded" Grid.Row="1"/>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2">
 

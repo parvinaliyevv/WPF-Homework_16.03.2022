@@ -5,13 +5,12 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      d:DesignHeight="450" d:DesignWidth="800" mc:Ignorable="d" >
+      d:DesignHeight="450" d:DesignWidth="800" mc:Ignorable="d">
 
     <Grid>
         
         <Grid.RowDefinitions>
             <RowDefinition Height="*" MaxHeight="50"/>
-            <RowDefinition Height="1"/>
             <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
 
@@ -24,13 +23,13 @@
                 <MenuItem Header="Save" Icon="{materialDesign:PackIcon Kind=ContentSave}"/>
                 <MenuItem Header="Save as"/>
                 <Separator/>
-                <MenuItem Header="Exit" Icon="{materialDesign:PackIcon Kind=ExitToApp}" InputGestureText="Ctrl+E"/>
+                <MenuItem Header="Exit" Icon="{materialDesign:PackIcon Kind=ExitToApp}" InputGestureText="Ctrl+E" Click="CloseApp_MenuItemClicked"/>
 
             </MenuItem>
             <MenuItem Header="_Edit">
 
-                <MenuItem Header="Add file" Icon="{materialDesign:PackIcon Kind=FilePlus}"/>
-                <MenuItem Header="Add folder" Icon="{materialDesign:PackIcon Kind=FolderPlus}"/>
+                <MenuItem Header="Add file" Icon="{materialDesign:PackIcon Kind=FilePlus}" Command="{Binding AddFileCommand}"/>
+                <MenuItem Header="Add folder" Icon="{materialDesign:PackIcon Kind=FolderPlus}" Command="{Binding AddFolderCommand}"/>
 
             </MenuItem>
             <MenuItem Header="_View">
@@ -47,8 +46,6 @@
             </MenuItem>
         </Menu>
 
-        <Border Background="#FFFAFAFA" Grid.Row="1"/>
-
         <materialDesign:Card Grid.Row="2">
             <TabControl Style="{StaticResource MaterialDesignNavigationRailTabControl}">
 
@@ -60,7 +57,7 @@
 
                      <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseUp">
-                            <i:InvokeCommandAction Command="{Binding DisplayImages}"/>
+                            <i:InvokeCommandAction Command="{Binding DisplayImagesCommand}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     
@@ -72,7 +69,7 @@
                     </TabItem.Header>
 
                     <ItemsControl ItemsSource="{Binding Items, Mode=TwoWay}" AllowDrop="True">
-
+                        
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel/>
@@ -111,7 +108,7 @@
 
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseUp">
-                            <i:InvokeCommandAction Command="{Binding DisplayVideos}"/>
+                            <i:InvokeCommandAction Command="{Binding DisplayVideosCommand}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     

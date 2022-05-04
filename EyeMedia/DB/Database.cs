@@ -16,12 +16,12 @@ namespace EyeMedia.DB
         {
             ImageItems = new()
             {
-                new ImageItem(Services.ImageService.GetImageFromPath(@"C:\Users\Aliy_ql08\Desktop\WPF-Homework_16.03.2022\EyeMedia\Video\sharp.png")),
+                //new ImageItem(Services.ImageService.GetImageFromPath(@"C:\Users\Aliy_ql08\Desktop\WPF-Homework_16.03.2022\EyeMedia\Video\sharp.png")),
             };
 
             VideoItems = new()
             {
-                new VideoItem(Services.ImageService.GetImageFromPath(@"C:\Users\Aliy_ql08\Desktop\WPF-Homework_16.03.2022\EyeMedia\Video\sharp.png")),
+                //new VideoItem(Services.ImageService.GetImageFromPath(@"C:\Users\Aliy_ql08\Desktop\WPF-Homework_16.03.2022\EyeMedia\Video\sharp.png")),
             };
         }
 
