@@ -1,16 +1,17 @@
 ﻿using EyeMedia.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace EyeMedia.Views
 {
     public partial class ImagePage : Page
     {
-        public ImagePage()
+        public ImagePage(ImageSource image)
         {
             InitializeComponent();
 
-            DataContext = new ImageViewModel();
+            DataContext = new ImageViewModel(image);
         }
 
 

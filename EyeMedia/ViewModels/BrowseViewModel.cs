@@ -1,9 +1,13 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 using System.Collections.ObjectModel;
 using EyeMedia.Commands;
 using EyeMedia.DB;
 using EyeMedia.Models.Abstract;
-using Microsoft.Win32;
+using EyeMedia.Models.Concrete;
+using Ookii.Dialogs.Wpf;
 
 namespace EyeMedia.ViewModels
 {
@@ -12,6 +16,8 @@ namespace EyeMedia.ViewModels
         #region Properties
 
         public ObservableCollection<ItemBase> Items { get; set; }
+
+        public bool IsImageItems { get; set; }
 
 
         public int ItemsHeight
@@ -49,15 +55,16 @@ namespace EyeMedia.ViewModels
         public BrowseViewModel()
         {
             Items = new();
+            IsImageItems = true;
 
             ItemsHeight = 150;
             ItemsWidth = 150;
 
-            OpenImageItemCommand = new(sender => MainViewModel.GetInstance().SelectedPage = new Views.ImagePage());
-            OpenVideoItemCommand = new(sender => MainViewModel.GetInstance().SelectedPage = new Views.VideoPage());
+            OpenImageItemCommand = new(sender => MainViewModel.GetInstance().SelectedPage = new Views.ImagePage(((sender as Border).DataContext as ImageItem).Image));
+            OpenVideoItemCommand = new(sender => MainViewModel.GetInstance().SelectedPage = new Views.VideoPage(((sender as Border).DataContext as VideoItem).VideoPath));
 
-            DisplayImagesCommand = new(sender => { Items.Clear(); Database.GetInstance().ImageItems.ForEach(obj => Items.Add(obj)); });
-            DisplayVideosCommand = new(sender => { Items.Clear(); Database.GetInstance().VideoItems.ForEach(obj => Items.Add(obj)); });
+            DisplayImagesCommand = new(sender => { Items.Clear(); Database.GetInstance().ImageItems.ForEach(obj => Items.Add(obj)); IsImageItems = true; });
+            DisplayVideosCommand = new(sender => { Items.Clear(); Database.GetInstance().VideoItems.ForEach(obj => Items.Add(obj)); IsImageItems = false; });
 
             AddFileCommand = new(sender => AddFile() );
             AddFolderCommand = new(sender => AddFolder() );
@@ -65,25 +72,74 @@ namespace EyeMedia.ViewModels
             Database.GetInstance().ImageItems.ForEach(obj => Items.Add(obj));
         }
 
-
         public void AddFile()
         {
-            var fileDialog = new OpenFileDialog();
+            var fileDialog = new VistaOpenFileDialog();
+            
             fileDialog.Multiselect = true;
+            fileDialog.InitialDirectory = Directory.GetCurrentDirectory();
 
-            fileDialog.ShowDialog();
+            if (IsImageItems)
+                fileDialog.Filter = "PNG Files(*.png)|*.png|JPEG Files(*.jpeg)|*.jpeg|JPG Files(*.jpg)|*.jpg";
+            else
+                fileDialog.Filter = "MP4 Files(*.mp4)|*.mp4|AVI Files(*.avi)|*.avi|MOV Files(*.mov)|*.mov";
 
-            foreach (var item in fileDialog.FileNames)
-                Database.GetInstance().ImageItems.Add(Services.ImageService.GetImageFromPath(item));
+            fileDialog.FilterIndex = 1;
+
+            if (fileDialog.ShowDialog() is false) return;
+
+            if (IsImageItems)
+            {
+                foreach (var item in fileDialog.FileNames)
+                {
+                    var database = Database.GetInstance();
+                    database.ImageItems.Add(new(Services.ImageService.GetImageFromPath(item)));
+                }
+
+                DisplayImagesCommand.Execute(null);
+            }
+            else
+            {
+                foreach (var item in fileDialog.FileNames)
+                {
+                    var database = Database.GetInstance();
+                    database.VideoItems.Add(new(Services.ImageService.GetImageFromPath(@"C:\Users\Aliy_ql08\Desktop\WPF-Homework_16.03.2022\EyeMedia\multimedia.png"), item));
+                }
+
+                DisplayVideosCommand.Execute(null);
+            }
         }
 
         public void AddFolder()
         {
-            // var fileDialog = new FolderBrowserDialog();
-            // 
-            // 
-            // fileDialog.ShowDialog();
-           
+            var fileDialog = new VistaFolderBrowserDialog();
+
+            if (fileDialog.ShowDialog() is false) return;
+
+            if (IsImageItems)
+            {
+                var files = Directory.GetFiles(fileDialog.SelectedPath, "*.*", SearchOption.AllDirectories).Where(s => s.EndsWith(".png") || s.EndsWith(".jpeg") || s.EndsWith(".jpg"));
+
+                foreach (var item in files)
+                {
+                    var database = Database.GetInstance();
+                    database.ImageItems.Add(new(Services.ImageService.GetImageFromPath(item)));
+                }
+
+                DisplayImagesCommand.Execute(null);
+            }
+            else
+            {
+                var files = Directory.GetFiles(fileDialog.SelectedPath, "*.*", SearchOption.AllDirectories).Where(s => s.EndsWith(".mp4") || s.EndsWith(".avi") || s.EndsWith(".mov"));
+
+                foreach (var item in files)
+                {
+                    var database = Database.GetInstance();
+                    database.VideoItems.Add(new(Services.ImageService.GetImageFromPath(@"C:\Users\Aliy_ql08\Desktop\WPF-Homework_16.03.2022\EyeMedia\multimedia.png"), item));
+                }
+
+                DisplayVideosCommand.Execute(null);
+            }
         }
     }
 }

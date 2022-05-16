@@ -11,11 +11,11 @@ namespace EyeMedia.Views
         public bool IsPlay { get; set; }
 
 
-        public VideoPage()
+        public VideoPage(string videoPath)
         {
             InitializeComponent();
 
-            DataContext = new VideoViewModel();
+            DataContext = new VideoViewModel(videoPath);
         }
 
 

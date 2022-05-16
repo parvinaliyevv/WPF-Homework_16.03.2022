@@ -5,6 +5,11 @@ namespace EyeMedia.Models.Concrete
 {
     public class VideoItem : ItemBase
     {
-        public VideoItem(ImageSource source) : base(source) { }
+        public string VideoPath { get; set; }
+
+        public VideoItem(ImageSource source, string videoPath) : base(source)
+        {
+            VideoPath = videoPath;
+        }
     }
 }

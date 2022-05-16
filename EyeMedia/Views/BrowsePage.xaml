@@ -79,7 +79,7 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
 
-                                <Border Height="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.ItemsHeight, Mode=OneWay}" Width="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.ItemsWidth, Mode=OneWay}">
+                                <Border Name="imageBorder" Height="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.ItemsHeight, Mode=OneWay}" Width="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.ItemsWidth, Mode=OneWay}">
 
                                     <Border.CornerRadius>30</Border.CornerRadius>
                                     <Border.Margin>5</Border.Margin>
@@ -91,7 +91,7 @@
                                     <Button Background="Transparent" BorderThickness="0" Height="auto" Width="auto">
 
                                         <Button.InputBindings>
-                                            <MouseBinding Command="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.OpenImageItemCommand}" Gesture="LeftDoubleClick"/>
+                                            <MouseBinding Command="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.OpenImageItemCommand}" CommandParameter="{Binding ElementName=imageBorder}" Gesture="LeftDoubleClick"/>
                                         </Button.InputBindings>
 
                                     </Button>
@@ -130,7 +130,7 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
 
-                                <Border Height="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.ItemsHeight, Mode=OneWay}" Width="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.ItemsWidth, Mode=OneWay}">
+                                <Border Name="videoBorder" Height="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.ItemsHeight, Mode=OneWay}" Width="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.ItemsWidth, Mode=OneWay}">
 
                                     <Border.CornerRadius>30</Border.CornerRadius>
                                     <Border.Margin>5</Border.Margin>
@@ -142,7 +142,7 @@
                                     <Button Background="Transparent" BorderThickness="0" Height="auto" Width="auto">
 
                                         <Button.InputBindings>
-                                            <MouseBinding Command="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.OpenVideoItemCommand}" Gesture="LeftDoubleClick"/>
+                                            <MouseBinding Command="{Binding RelativeSource={RelativeSource AncestorType=Page, Mode=FindAncestor}, Path=DataContext.OpenVideoItemCommand}" CommandParameter="{Binding ElementName=videoBorder}" Gesture="LeftDoubleClick"/>
                                         </Button.InputBindings>
 
                                     </Button>

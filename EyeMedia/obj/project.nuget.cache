@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "AunKgSe7lNvdv+89DMB0JWIrexYkb9+HoVKrAjq33sijz6IeIKm0+ZNd1JoNP9T2YUEsGW1VNGhlqkLpYEpgcQ==",
+  "dgSpecHash": "lytsDQlQn/EL8Gnv5wElB7C7qbqE69Uox20a5W8NgWM4b6BsMOa8gUgop8bAZp+WHmCO2vCRm4OqP3kPAGDcQw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Aliy_ql08\\Desktop\\WPF-Homework_16.03.2022\\EyeMedia\\EyeMedia.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Aliy_ql08\\.nuget\\packages\\materialdesigncolors\\2.0.5\\materialdesigncolors.2.0.5.nupkg.sha512",
     "C:\\Users\\Aliy_ql08\\.nuget\\packages\\materialdesignthemes\\4.4.0\\materialdesignthemes.4.4.0.nupkg.sha512",
-    "C:\\Users\\Aliy_ql08\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.39\\microsoft.xaml.behaviors.wpf.1.1.39.nupkg.sha512"
+    "C:\\Users\\Aliy_ql08\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.39\\microsoft.xaml.behaviors.wpf.1.1.39.nupkg.sha512",
+    "C:\\Users\\Aliy_ql08\\.nuget\\packages\\ookii.dialogs.wpf\\5.0.1\\ookii.dialogs.wpf.5.0.1.nupkg.sha512"
   ],
   "logs": []
 }
